@@ -4,6 +4,9 @@ defmodule RsvpWeb.EventController do
   alias Rsvp.Events
   alias Rsvp.Events.Event
 
+  alias Rsvp.EventResponses
+  alias Rsvp.EventResponses.EventResponse
+
   def index(conn, _params) do
     events = Events.list_events()
     render(conn, "index.html", events: events)
@@ -28,7 +31,8 @@ defmodule RsvpWeb.EventController do
 
   def show(conn, %{"id" => id}) do
     event = Events.get_event!(id)
-    render(conn, "show.html", event: event)
+    changeset = EventResponses.change_event_response(%EventResponse{})
+    render(conn, "show.html", event: event, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do

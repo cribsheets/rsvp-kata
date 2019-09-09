@@ -17,6 +17,8 @@
   <%= checkbox f, :going %>
   <%= error_tag f, :going %>
 
+  <%= hidden_input f, :event_id, value: @event.id %>
+
   <div>
     <%= submit "Save" %>
   </div>

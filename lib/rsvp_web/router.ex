@@ -18,6 +18,7 @@ defmodule RsvpWeb.Router do
 
     get "/", PageController, :index
     resources "/events", EventController
+    resources "/event_responses", EventResponseController
   end
 
   # Other scopes may use custom stacks.

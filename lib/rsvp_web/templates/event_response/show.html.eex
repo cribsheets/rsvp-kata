@@ -1,0 +1,23 @@
+<h1>Show Event response</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @event_response.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @event_response.email %>
+  </li>
+
+  <li>
+    <strong>Going:</strong>
+    <%= @event_response.going %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.event_response_path(@conn, :edit, @event_response) %></span>
+<span><%= link "Back", to: Routes.event_response_path(@conn, :index) %></span>

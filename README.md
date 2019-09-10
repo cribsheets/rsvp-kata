@@ -1,5 +1,25 @@
 # RSVP (an app kata from cribsheets)
 
+To run, clone down a copy of this repository to your local machine.
+
+## Requirements
+
+* Elixir -- [installation guide](https://elixir-lang.org/install.html)
+* Phoenix -- [installation guide](https://hexdocs.pm/phoenix/installation.html)
+
+## Running the app
+
+* `mix phx.server`
+* to run with a repl in context: `iex -S mix phx.server`
+
+## Running tests
+
+* `mix test`
+
+------
+
+_original instructions below_
+
 This application is a straightforward implementation of a simple web-based RSVP
 application. Users visit a page and indicate whether they can attend an event;
 this RSVP is stored in a relational database. In subsequent parts, the project

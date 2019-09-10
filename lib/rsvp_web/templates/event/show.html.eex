@@ -1,0 +1,20 @@
+<h1>Show Event</h1>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @event.title %>
+  </li>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @event.date %>
+  </li>
+
+</ul>
+
+<%= render RsvpWeb.EventResponseView, "form.html", Map.put(assigns, :action, Routes.event_response_path(@conn, :create)) %>
+
+<span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>
+<span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>

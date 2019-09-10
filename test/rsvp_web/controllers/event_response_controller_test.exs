@@ -3,12 +3,18 @@ defmodule RsvpWeb.EventResponseControllerTest do
 
   alias Rsvp.EventResponses
 
-  @create_attrs %{email: "some email", going: true, name: "some name"}
+  @create_attrs %{email: "some email", going: true, name: "some name", event_id: nil}
   @update_attrs %{email: "some updated email", going: false, name: "some updated name"}
-  @invalid_attrs %{email: nil, going: nil, name: nil}
+  @invalid_attrs %{email: nil, going: nil, name: nil, event_id: nil}
+
+  def fixture(:event) do
+    {:ok, event} = Rsvp.Events.create_event(%{title: "some title", date: ~N[2010-04-17 14:00:00]})
+    event
+  end
 
   def fixture(:event_response) do
-    {:ok, event_response} = EventResponses.create_event_response(@create_attrs)
+    event = fixture(:event)
+    {:ok, event_response} = EventResponses.create_event_response(%{ @create_attrs | event_id: event.id})
     event_response
   end
 
@@ -44,10 +50,10 @@ defmodule RsvpWeb.EventResponseControllerTest do
   end
 
   describe "edit event_response" do
-    setup [:create_event_response]
+    setup [:create_event_response, :create_event]
 
-    test "renders form for editing chosen event_response", %{conn: conn, event_response: event_response} do
-      conn = get(conn, Routes.event_response_path(conn, :edit, event_response))
+    test "renders form for editing chosen event_response", %{conn: conn, event_response: event_response, event: event} do
+      conn = get(conn, Routes.event_response_path(conn, :edit, event_response, event))
       assert html_response(conn, 200) =~ "Edit Event response"
     end
   end
@@ -84,5 +90,10 @@ defmodule RsvpWeb.EventResponseControllerTest do
   defp create_event_response(_) do
     event_response = fixture(:event_response)
     {:ok, event_response: event_response}
+  end
+
+  defp create_event(_) do
+    event = fixture(:event)
+    {:ok, event: event}
   end
 end

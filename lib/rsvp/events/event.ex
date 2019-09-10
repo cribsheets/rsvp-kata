@@ -6,6 +6,8 @@ defmodule Rsvp.Events.Event do
     field :date, :naive_datetime
     field :title, :string
 
+    has_many :event_responses, Rsvp.EventResponses.EventResponse
+
     timestamps()
   end
 

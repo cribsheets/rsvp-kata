@@ -6,7 +6,8 @@ defmodule Rsvp.EventResponses.EventResponse do
     field :email, :string
     field :going, :boolean, default: false
     field :name, :string
-    field :event_id, :id
+
+    belongs_to :events, Rsvp.Events.Event, foreign_key: :event_id
 
     timestamps()
   end

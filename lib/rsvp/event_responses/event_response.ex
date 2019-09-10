@@ -14,7 +14,7 @@ defmodule Rsvp.EventResponses.EventResponse do
   @doc false
   def changeset(event_response, attrs) do
     event_response
-    |> cast(attrs, [:name, :email, :going])
-    |> validate_required([:name, :email, :going])
+    |> cast(attrs, [:name, :email, :going, :event_id])
+    |> validate_required([:name, :email, :going, :event_id])
   end
 end

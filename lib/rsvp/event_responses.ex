@@ -22,6 +22,13 @@ defmodule Rsvp.EventResponses do
   end
 
   @doc """
+  Returns the list of event_responses for a given event.
+  """
+  def list_event_responses_for_event(event_id) do
+    Repo.all(from response in EventResponse, where: response.event_id == ^event_id)
+  end
+
+  @doc """
   Gets a single event_response.
 
   Raises `Ecto.NoResultsError` if the Event response does not exist.

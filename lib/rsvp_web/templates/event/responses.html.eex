@@ -1,0 +1,33 @@
+<h1>Event Responses</h1>
+
+<h2>
+  Event: <%= link @event.title, to: Routes.event_path(@conn, :show, @event) %>
+</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Going</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for event_response <- @event_responses do %>
+    <tr>
+      <td><%= event_response.name %></td>
+      <td><%= event_response.email %></td>
+      <td><%= event_response.going %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.event_response_path(@conn, :show, event_response) %></span>
+        <span><%= link "Edit", to: Routes.event_response_path(@conn, :edit, event_response) %></span>
+        <span><%= link "Delete", to: Routes.event_response_path(@conn, :delete, event_response), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+

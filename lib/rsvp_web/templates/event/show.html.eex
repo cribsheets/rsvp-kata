@@ -13,7 +13,7 @@
   </li>
 
 </ul>
-<% IO.inspect assigns %>
+
 <%= render RsvpWeb.EventResponseView, "form.html", Map.put(assigns, :action, Routes.event_response_path(@conn, :create)) %>
 
 <span><%= link "Edit", to: Routes.event_path(@conn, :edit, @event) %></span>

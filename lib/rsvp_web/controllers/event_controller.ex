@@ -35,6 +35,12 @@ defmodule RsvpWeb.EventController do
     render(conn, "show.html", event: event, changeset: changeset)
   end
 
+  def responses(conn, %{"id" => id}) do
+    event = Events.get_event!(id)
+    event_responses = EventResponses.list_event_responses_for_event(id)
+    render(conn, "responses.html", event: event, event_responses: event_responses)
+  end
+
   def edit(conn, %{"id" => id}) do
     event = Events.get_event!(id)
     changeset = Events.change_event(event)

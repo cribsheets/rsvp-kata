@@ -2,4 +2,6 @@
 
 <%= render "form.html", Map.put(assigns, :action, Routes.event_path(@conn, :update, @event)) %>
 
+<%#= render RsvpWeb.EventResponseView, "form.html", Map.put(assigns, :action, Routes.event_response_path(@conn, :create)) %>
+
 <span><%= link "Back", to: Routes.event_path(@conn, :index) %></span>

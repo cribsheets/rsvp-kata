@@ -6,14 +6,19 @@ defmodule Rsvp.EventResponsesTest do
   describe "event_responses" do
     alias Rsvp.EventResponses.EventResponse
 
-    @valid_attrs %{email: "some email", going: true, name: "some name"}
+    @valid_attrs %{email: "some email", going: true, name: "some name", event_id: nil}
     @update_attrs %{email: "some updated email", going: false, name: "some updated name"}
-    @invalid_attrs %{email: nil, going: nil, name: nil}
+    @invalid_attrs %{email: nil, going: nil, name: nil, event_id: nil}
 
     def event_response_fixture(attrs \\ %{}) do
+      {:ok, event} = Rsvp.Events.create_event(%{
+        title: "fancy",
+        date: ~N[2010-04-17 14:00:00]
+      })
+
       {:ok, event_response} =
         attrs
-        |> Enum.into(@valid_attrs)
+        |> Enum.into(%{ @valid_attrs | event_id: event.id })
         |> EventResponses.create_event_response()
 
       event_response
@@ -30,10 +35,16 @@ defmodule Rsvp.EventResponsesTest do
     end
 
     test "create_event_response/1 with valid data creates a event_response" do
-      assert {:ok, %EventResponse{} = event_response} = EventResponses.create_event_response(@valid_attrs)
+      {:ok, event} = Rsvp.Events.create_event(%{
+        title: "fancy",
+        date: ~N[2010-04-17 14:00:00]
+      })
+
+      assert {:ok, %EventResponse{} = event_response} = EventResponses.create_event_response(%{ @valid_attrs | event_id: event.id })
       assert event_response.email == "some email"
       assert event_response.going == true
       assert event_response.name == "some name"
+      assert event_response.event_id == event.id
     end
 
     test "create_event_response/1 with invalid data returns error changeset" do
